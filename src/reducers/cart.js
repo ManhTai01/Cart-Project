@@ -1,24 +1,36 @@
 import * as types from "./../constants/actionType";
 var data = JSON.parse(localStorage.getItem("Cart"));
-var initialState = [
-  {
-    product: {
-      id: 2,
-      name: "Iphone 8",
-      image:
-        "https://cdn.cellphones.com.vn/media/catalog/product/cache/7/image/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone_8_plus_256gb_1_1.jpg",
-      description: "Do Apple sản xuất",
-      price: 400,
-      inventory: 20,
-      rating: 4,
-    },
-    quantity: 5,
-  },
-];
+var initialState = data ? data : [];
 const cart = (state = initialState, action) => {
+  var { product, quantity } = action;
   switch (action.type) {
     case types.ADD_TO_CARD:
-      console.log(state);
+      var index = state.findIndex((x) => x.product.id === product.id);
+
+      if (index !== -1) {
+        state[index].quantity += quantity;
+      } else {
+        state.push({
+          product,
+          quantity,
+        });
+      }
+      localStorage.setItem("Cart", JSON.stringify(state));
+      return [...state];
+    case types.DELETE_PRODUCT_IN_CART:
+      index = state.findIndex((x) => x.product.id === product.id);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
+      localStorage.setItem("Cart", JSON.stringify(state));
+      return state;
+    case types.UPDATE_PRODUCT_IN_CART:
+      index = state.findIndex((x) => x.product.id === product.id);
+      if (index !== -1) {
+        state[index].quantity = quantity;
+        console.log(quantity);
+      }
+      localStorage.setItem("Cart", JSON.stringify(state));
       return [...state];
     default:
       return [...state];

@@ -2,8 +2,8 @@ import "./App.css";
 import Header from "./components/Header";
 import ProductsContainer from "./containers/ProductContainer";
 import CartContainer from "./containers/CartContainer";
-import Message from "./components/Message";
 import Footer from "./components/Footer";
+import MessageContainer from "./containers/MessageContainer";
 function App() {
   return (
     <div className="hidden-sn animated deep-purple-skin">
@@ -11,7 +11,7 @@ function App() {
       <main id="mainContainer">
         <div className="container">
           <ProductsContainer />
-          <Message />
+          <MessageContainer />
           <CartContainer />
         </div>
       </main>

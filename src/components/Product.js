@@ -1,3 +1,5 @@
+import * as msg from "./../constants/message";
+
 function Product(props) {
   const showRating = (rating) => {
     var results = [];
@@ -8,6 +10,10 @@ function Product(props) {
       results.push(<i key={j + 5} className="fa fa-star-o" />);
     }
     return results;
+  };
+  const addToCart = (product) => {
+    props.onAddToCart(product);
+    props.onChangeMsg(msg.MSG_ADD_TO_CARD_SUCCESS);
   };
   return (
     <div className="col-lg-4 col-md-6 mb-r">
@@ -38,6 +44,7 @@ function Product(props) {
                 data-placement="top"
                 title=""
                 data-original-title="Add to Cart"
+                onClick={() => addToCart(props.product)}
               >
                 <i className="fa fa-shopping-cart"></i>
               </a>

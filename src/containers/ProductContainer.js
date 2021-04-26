@@ -1,6 +1,7 @@
 import Products from "./../components/Products";
 import Product from "./../components/Product";
 import PropTypes from "prop-types";
+import { addToCart, changeMsg } from "./../action/index";
 
 import { connect } from "react-redux";
 function ProductsContainer(props) {
@@ -8,7 +9,14 @@ function ProductsContainer(props) {
     <Products>
       {props.products &&
         props.products.map((product, index) => {
-          return <Product key={index} product={product} />;
+          return (
+            <Product
+              key={index}
+              product={product}
+              onAddToCart={props.onAddToCart}
+              onChangeMsg={props.onChangeMsg}
+            />
+          );
         })}
     </Products>
   );
@@ -31,5 +39,14 @@ const mapStateToProps = (state) => {
     products: state.products,
   };
 };
-
-export default connect(mapStateToProps, null)(ProductsContainer);
+const mapDispatchToProp = (dispatch, props) => {
+  return {
+    onAddToCart: (product) => {
+      dispatch(addToCart(product, 1));
+    },
+    onChangeMsg: (msg) => {
+      dispatch(changeMsg(msg));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProp)(ProductsContainer);

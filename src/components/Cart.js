@@ -1,10 +1,5 @@
-import CartItem from "./CartItem";
-import CartResult from "./CartResult";
-
 function Cart(props) {
-  console.log("Aadadasd");
   var { children } = props;
-  console.log(props);
   return (
     <section className="section">
       <div className="table-responsive">
@@ -19,10 +14,7 @@ function Cart(props) {
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            {children}
-            <CartResult />
-          </tbody>
+          <tbody>{children}</tbody>
         </table>
       </div>
     </section>

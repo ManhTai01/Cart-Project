@@ -31,10 +31,8 @@ function CartContainer(props) {
   };
   return (
     <Cart>
-      <>
         {showCartItem(props.cart)}
         {showTotal(props.cart)}
-      </>
     </Cart>
   );
 }
